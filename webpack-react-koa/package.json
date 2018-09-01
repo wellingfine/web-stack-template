@@ -1,0 +1,19 @@
+{
+  "name": "webpack-react-koa",
+  "version": "1.0.0",
+  "description": "web template",
+  "main": "index.js",
+  "scripts": {
+    "dev": "node ./server/index.js"
+  },
+  "author": "welling",
+  "license": "ISC",
+  "dependencies": {
+    "koa": "^2.5.2",
+    "koa-router": "^7.4.0",
+    "koa-static": "^5.0.0"
+  },
+  "devDependencies": {
+    "webpack": "^4.17.1"
+  }
+}
