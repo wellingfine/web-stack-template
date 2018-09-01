@@ -1,9 +1,11 @@
 
-var webpack=require('webpack')
-
-var base=require('./config')
+var base=require('./base')
 
 
 var config={
+    ...base,
+    mode:'development',
     
 }
+
+module.exports=config
