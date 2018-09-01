@@ -7,10 +7,10 @@ if(process.env.NODE_ENV=='dev'){
     config=require('./product')
 }
 
-var complier=webpack(config)
+var compiler=webpack(config)
 
 
-complier.run(function(err,stats){
+compiler.run(function(err,stats){
     process.stdout.write(stats.toString({
         colors:true
     }))

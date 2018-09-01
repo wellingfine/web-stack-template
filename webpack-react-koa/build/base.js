@@ -13,6 +13,7 @@ var config={
 	output:{
 		path:resolve('./server/public'),
 		filename:'[name].js',
+		publicPath:'/'
 	},
 	resolve:{
 		extensions: ['.js', '.jsx', '.json'],
@@ -24,14 +25,15 @@ var config={
 			use:'style-loader!css-loader'
 		},{
 			test:/\.scss$/,
-			use:'style-loader!css-loader!scss-loader'
+			loader:'style-loader!css-loader!sass-loader'
 		},{
 			test:/\.(js|jsx)$/,
 			use:[{
 				loader:'babel-loader',
 				options:{
-					presets:['@babel/preset-env','@babel/preset-react']
-				}
+					presets:['@babel/preset-env','@babel/preset-react'],
+					plugins: ['react-hot-loader/babel'],
+				},
 			}]
 		}]
 	},
