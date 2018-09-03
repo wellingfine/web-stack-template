@@ -1,7 +1,7 @@
 
 var webpack=require('webpack')
 var config={}
-if(process.env.NODE_ENV=='dev'){
+if(process.env.NODE_ENV==='dev'){
     config=require('./dev')
 }else{
     config=require('./product')

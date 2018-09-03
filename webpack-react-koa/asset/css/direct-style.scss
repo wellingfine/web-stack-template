@@ -1,0 +1,22 @@
+html,body{
+	margin: 0;padding: 0;
+	background: #eee;
+}
+
+#face-bar{
+	margin: 20px 10px;
+}
+.face{
+	display: inline-block;
+	width: 48px;height: 48px;
+	margin-right: 10px;
+}
+.face.cool{
+	background: url(../image/cool.png) 0 0 no-repeat;
+}
+.face.smile{
+	background: url(../image/smile.png) 0 0 no-repeat;
+}
+.face.what{
+	background: url(../image/what.png) 0 0 no-repeat;
+}

@@ -1,17 +1,14 @@
 var HtmlWebpackPlugin = require('html-webpack-plugin');
-var path = require('path');
 
-function resolve(p){
-	return path.resolve(__dirname+'/../',p)
-}
+const u=require('./util')
 
-var config={
+var base={
 	entry:{
 		//TODO dynamic read entry directory
-		index:resolve('./client/entry/index.js')
+		index:u.resolve('./client/entry/index.js')
 	},
 	output:{
-		path:resolve('./server/public'),
+		path:u.resolve('./server/public'),
 		filename:'[name].js',
 		publicPath:'/'
 	},
@@ -21,13 +18,23 @@ var config={
 	
 	module:{
 		rules:[{
-			test:/\.css$/,
+			test:/\.css$/i,
 			use:'style-loader!css-loader'
 		},{
-			test:/\.scss$/,
+			test:/\.scss$/i,
 			loader:'style-loader!css-loader!sass-loader'
 		},{
-			test:/\.(js|jsx)$/,
+			test: /\.(png|jpe?g|gif)$/i,
+			use: [{
+				loader: 'url-loader',
+				options: {
+					name:'[name].[hash:4].[ext]',
+					limit: 2048,
+					outputPath:'asset/image/'
+				}
+			}]
+		},{
+			test:/\.(js|jsx)$/i,
 			use:[{
 				loader:'babel-loader',
 				options:{
@@ -39,9 +46,9 @@ var config={
 	},
 	plugins:[
 		new HtmlWebpackPlugin({
-			template:resolve('./client/entry/default.html')
+			template:u.resolve('./client/entry/default.html')
 		})
 	]
 }
 
-module.exports=config
+module.exports = base
