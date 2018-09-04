@@ -26,8 +26,10 @@ project
 
 * ssr 方案确定
 * css模块化
-* css图片等资源生成
+* css图片等资源生成，接入cdn路径绑定
+* manifest.json?
 * server+webpack 热重载
 * 本地mock
 * 自动化测试
+* react router |redux
 
