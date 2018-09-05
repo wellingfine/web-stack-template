@@ -1,7 +1,7 @@
 import React from 'react'
 const ReactDOMServer = require('react-dom/server');
-import '../../asset/css/direct-style.scss'
-import cssModule from '../../asset/css/module-style.scss'
+// import '../../asset/css/direct-style.scss'
+// import cssModule from '../../asset/css/module-style.scss'
 
 export default class App extends React.Component {
 	constructor(props){
@@ -20,10 +20,9 @@ export default class App extends React.Component {
 	render() { 
 		return (
 			<div>
-				<span>123</span>
 				<h1>Hello React! {this.state.title}</h1>
 				<a onClick={()=>this.clickMe()}>Click me {this.state.count}</a>
-				<div className={cssModule['module']}>.module-a style</div>
+				{/* <div className={cssModule['module']}>.module-a style</div> */}
 				<div id="face-bar">
 					<span className="face cool"></span>
 					<span className="face smile"></span>
@@ -33,8 +32,10 @@ export default class App extends React.Component {
 		);
 	}
 };
+/*
 var a=new App()
 a.state.title='App title'
 var element = a.render()
 console.log(element)
-console.log(ReactDOMServer.renderToString(element))
+var jsonElement=JSON.stringify(element)
+console.log(ReactDOMServer.renderToString(JSON.parse(jsonElement)))*/

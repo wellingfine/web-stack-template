@@ -7,5 +7,5 @@ import App from '../component/App'
 
 // const HotApp=hot(module)(App)
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.hydrate(<App />, document.getElementById('root'));
 // ReactDOM.render(<HotApp />, document.getElementById('root'));
