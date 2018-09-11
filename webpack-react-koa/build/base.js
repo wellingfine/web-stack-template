@@ -40,9 +40,7 @@ for(var i in entryObj){
 			template: u.resolve('./client/entry/default.html')
 		})
 	);
-	// break;
 }
-
 
 var base={
 	entry: entryObj,
@@ -91,8 +89,9 @@ var base={
 		new MiniCssExtractPlugin({
 			// Options similar to the same options in webpackOptions.output
 			// both options are optional
-			filename: isDev ? '[name].css' : '[name].[contenthash:5].css',
-			chunkFilename: isDev ? '[id].css' : '[id].[contenthash:5].css',
+			// css file name should be named by hash ,so can be use between chunks
+			filename: isDev ? '[name].css' : '[contenthash:7].css',
+			chunkFilename: isDev ? '[id].css' : '[contenthash:7].css',
 		}),
 
 	]
