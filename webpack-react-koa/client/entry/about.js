@@ -1,9 +1,9 @@
-	
-const React= require('react')
-const ReactDOM=require('react-dom')
+
+const React = require('react')
+const ReactDOM = require('react-dom')
 import { hot } from 'react-hot-loader'
 
-import App from '../page/Home'
+import App from '../component/App'
 
 // const HotApp=hot(module)(App)
 
