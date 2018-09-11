@@ -1,9 +1,16 @@
 var path = require('path');
+const fs=require('fs')
 
 function resolve(p) {
 	return path.resolve(__dirname + '/../', p)
 }
 
+function readFileList(dir,recurse){
+	if (recurse){
+		
+	}
+	return fs.readdirSync(dir)
+}
 
 var config={
     publicPath:'',
@@ -14,5 +21,6 @@ var config={
 
 module.exports={
 	config,
-	resolve
+	resolve,
+	readFileList,
 }

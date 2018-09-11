@@ -1,12 +1,51 @@
 var HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+
+var isDev=false
+if(process.env.NODE_ENV=='dev'){
+	isDev=true
+}
 
 const u=require('./util')
 
+/**
+ * 获取入口点所有文件
+ */
+var dir = u.resolve('./client/entry')
+var entrys=u.readFileList(dir)
+entrys=entrys.filter(function(item){
+	if (/\.js$/.test(item)){
+		return true
+	}
+	return false
+})
+var entryObj={}
+for(var i=0;i<entrys.length;i++){
+	var file = entrys[i]
+	var name=file.substring(0,file.length-3)
+	entryObj[name]=u.resolve(dir+'/'+file)
+}
+
+/**
+ * 生成各个入口点自己的html
+ */
+var hwp=[]
+for(var i in entryObj){
+
+	hwp.push(
+		new HtmlWebpackPlugin({
+			chunks:[i],
+			filename: i+'.html',
+			//TODO 各个 chunk给不同名字的html模板
+			template: u.resolve('./client/entry/default.html')
+		})
+	);
+	// break;
+}
+
+
 var base={
-	entry:{
-		//TODO dynamic read entry directory
-		index:u.resolve('./client/entry/index.js')
-	},
+	entry: entryObj,
 	output:{
 		path:u.resolve('./server/public'),
 		filename:'[name].js',
@@ -18,11 +57,12 @@ var base={
 	
 	module:{
 		rules:[{
-			test:/\.css$/i,
-			use:'style-loader!css-loader'
-		},{
-			test:/\.scss$/i,
-			loader:'style-loader!css-loader!sass-loader'
+			test:/\.(sa|sc|c)ss$/i,
+			use:[
+				isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
+				'css-loader',
+				'sass-loader',
+			]
 		},{
 			test: /\.(png|jpe?g|gif)$/i,
 			use: [{
@@ -46,9 +86,15 @@ var base={
 		}]
 	},
 	plugins:[
-		new HtmlWebpackPlugin({
-			template:u.resolve('./client/entry/default.html')
-		})
+		...hwp,
+
+		new MiniCssExtractPlugin({
+			// Options similar to the same options in webpackOptions.output
+			// both options are optional
+			filename: isDev ? '[name].css' : '[name].[contenthash:5].css',
+			chunkFilename: isDev ? '[id].css' : '[id].[contenthash:5].css',
+		}),
+
 	]
 }
 
