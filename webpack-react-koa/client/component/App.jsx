@@ -1,13 +1,13 @@
 import React from 'react'
 const ReactDOMServer = require('react-dom/server');
 // import '../../asset/css/direct-style.scss'
-import cssModule from '../../asset/css/module-style.scss'
+// import cssModule from '../../asset/css/module-style.scss'
 
 export default class App extends React.Component {
 	constructor(props){
 		super(props)
 		this.state={
-			count:0,
+			count:1,
 			title:'init ReactComponent'
 		}
 	}

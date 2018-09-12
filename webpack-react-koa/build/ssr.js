@@ -9,10 +9,10 @@ const nodeExternals = require('webpack-node-externals');
 const u=require('./util')
 const base= require('./base')
 
+var { jsFile } = u.parseEntry()
+
 var config={
-	entry:{
-		app:u.resolve('./client/component/App.jsx'),
-	},
+	entry: jsFile,
 	output:{
 		path: u.resolve('./server/ssr'),
 		filename:'[name].js',

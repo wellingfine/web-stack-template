@@ -5,11 +5,30 @@ function resolve(p) {
 	return path.resolve(__dirname + '/../', p)
 }
 
-function readFileList(dir,recurse){
-	if (recurse){
-		
+/**
+ * 获取入口点所有支持的文件
+ */
+function parseEntry(){
+	var jsFile, htmlFile
+	
+	var dir = resolve('./client/entry')
+	var entrys = fs.readdirSync(dir)
+	var jsFile = {}, htmlFile = {}
+	for (var i = 0; i < entrys.length; i++) {
+		var f = entrys[i]
+
+		if (/\.js$/.test(f)) {
+			var name = f.substring(0, f.length - 3)
+			jsFile[name] = resolve(dir + '/' + f)
+		} else if (/\.html$/.test(f)) {
+			var name = f.substring(0, f.length - 5)
+			htmlFile[name] = resolve(dir + '/' + f)
+		}
 	}
-	return fs.readdirSync(dir)
+
+	return {
+		jsFile,htmlFile
+	}
 }
 
 var config={
@@ -22,5 +41,5 @@ var config={
 module.exports={
 	config,
 	resolve,
-	readFileList,
+	parseEntry,
 }

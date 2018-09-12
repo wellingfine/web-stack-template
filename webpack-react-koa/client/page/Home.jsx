@@ -1,14 +1,15 @@
 import React from 'react'
 
-import '../../asset/css/direct-style.scss'
-import cssModule from '../../asset/css/module-style.scss'
+// import '../../asset/css/direct-style.scss'
+// import cssModule from '../../asset/css/module-style.scss'
 
 export default class App extends React.Component {
 	constructor(props) {
 		super(props)
 		this.state = {
 			count: 0,
-			title: 'init ReactComponent'
+			title: 'init ReactComponent',
+			message:'I am client.'
 		}
 	}
 	clickMe() {

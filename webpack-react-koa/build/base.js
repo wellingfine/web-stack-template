@@ -8,42 +8,28 @@ if(process.env.NODE_ENV=='dev'){
 
 const u=require('./util')
 
-/**
- * 获取入口点所有文件
- */
-var dir = u.resolve('./client/entry')
-var entrys=u.readFileList(dir)
-entrys=entrys.filter(function(item){
-	if (/\.js$/.test(item)){
-		return true
-	}
-	return false
-})
-var entryObj={}
-for(var i=0;i<entrys.length;i++){
-	var file = entrys[i]
-	var name=file.substring(0,file.length-3)
-	entryObj[name]=u.resolve(dir+'/'+file)
-}
+
+var {jsFile,htmlFile}= u.parseEntry()
 
 /**
  * 生成各个入口点自己的html
  */
 var hwp=[]
-for(var i in entryObj){
+for (var i in jsFile){
+	//找不到就给默认模板
+	var tplPath = htmlFile[i] || u.resolve('./client/entry/default.html');
 
 	hwp.push(
 		new HtmlWebpackPlugin({
-			chunks:[i],
+			chunks: [i],//TODO: common chunks option.
 			filename: i+'.html',
-			//TODO 各个 chunk给不同名字的html模板
-			template: u.resolve('./client/entry/default.html')
+			template: tplPath
 		})
 	);
 }
 
 var base={
-	entry: entryObj,
+	entry: jsFile,
 	output:{
 		path:u.resolve('./server/public'),
 		filename:'[name].js',

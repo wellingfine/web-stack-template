@@ -9,3 +9,5 @@ import App from '../component/App'
 
 ReactDOM.hydrate(<App />, document.getElementById('root'));
 // ReactDOM.render(<HotApp />, document.getElementById('root'));
+
+export default App

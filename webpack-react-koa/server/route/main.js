@@ -8,7 +8,10 @@ module.exports=function(app,router){
         ctx.redirect('/index.html')
     })
     router.get('/test',(ctx,next)=>{
-        ctx.body='route works'
+		
+        ctx.ssr('index',{
+			message:'I am Server'
+		})
     })
 	router.get('/ssr',(ctx,next)=>{
 		//get html layout

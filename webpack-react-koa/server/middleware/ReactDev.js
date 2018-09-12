@@ -6,19 +6,23 @@ var config = require('../../build/dev')
 /**
  * https://github.com/leecade/koa-webpack-middleware
  * make it compatiable with koa middleware
+ * modify by welling
  */
 function koaDevMiddleware(mw) {
 	return function (ctx, next) {
 		return new Promise((resolve) => {
-			mw(ctx.req, {
+			var resObj={
 				end: (content) => {
 					ctx.body = content;
+					ctx.res.locals = resObj.locals
 					resolve(false);
 				},
 				setHeader: (name, value) => {
 					ctx.set(name, value);
 				},
-			}, () => {
+			}
+			mw(ctx.req, resObj, () => {
+				ctx.res.locals = resObj.locals
 				resolve(true);
 			});
 		}).then((err) => {
@@ -44,13 +48,14 @@ function main(app){
 	app.use(koaDevMiddleware(
 		middleware(compiler,{
 			logLevel:'info',
+			serverSideRender:true,
 			headers:{
 				"X-Custom-Header": "yes" 
 			},
 			publicPath:config.output.publicPath
 		})
 	))
-	
+	return ;
 	app.use(koaHotMiddleware(
 		hm(compiler,{
 
