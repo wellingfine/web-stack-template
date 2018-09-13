@@ -4,6 +4,7 @@
 
 const webpack=require('webpack')
 const nodeExternals = require('webpack-node-externals');
+process.env.WEBPACK_MODE='ssr'
 
 
 const u=require('./util')

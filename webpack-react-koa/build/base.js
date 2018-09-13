@@ -22,7 +22,7 @@ for (var i in jsFile){
 	hwp.push(
 		new HtmlWebpackPlugin({
 			chunks: [i],//TODO: common chunks option.
-			filename: i+'.html',
+			filename: '../ssr/' + i + '.html',
 			template: tplPath
 		})
 	);
@@ -32,7 +32,7 @@ var base={
 	entry: jsFile,
 	output:{
 		path:u.resolve('./server/public'),
-		filename:'[name].js',
+		filename:'[name].[contenthash:5].js',
 		publicPath:'/'
 	},
 	resolve:{
