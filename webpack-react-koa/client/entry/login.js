@@ -1,14 +1,10 @@
-
-const React = require('react')
 const ReactDOM = require('react-dom')
-import { hot } from 'react-hot-loader'
 
-import App from '../page/Home'
+import App from '../page/Login'
 
-// const HotApp=hot(module)(App)
-
-ReactDOM.hydrate(<App />, document.getElementById('root'));
-// ReactDOM.render(<HotApp />, document.getElementById('root'));
+if (typeof document != undefined) {
+	ReactDOM.hydrate(<App />, document.getElementById('root'));
+}
 
 /**
  * export for ssr

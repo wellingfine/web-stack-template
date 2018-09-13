@@ -32,4 +32,5 @@ project
 * 本地mock
 * 自动化测试
 * react router |redux
+* koa 热更新
 

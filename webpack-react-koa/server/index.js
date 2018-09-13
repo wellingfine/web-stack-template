@@ -2,6 +2,7 @@ const Koa = require('koa');
 const Router =require('koa-router')
 const static=require('koa-static')
 const path=require('path')
+const fs=require('fs')
 
 const app = new Koa();
 const router = new Router();
@@ -29,9 +30,13 @@ if (isDev) {
 
 
 /**
- * make routers
+ * auto load routers
  */
-require('./route/main')(app, router)
+var routes = fs.readdirSync(__dirname +'/route');
+for(var i=0;i<routes.length;i++){
+	require(__dirname+'/route/'+routes[i])(app, router)
+}
+
 //add more routes here
 
 //add more routes here

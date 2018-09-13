@@ -7,8 +7,8 @@
     "start": "node ./server/index.js",
     "dev": "cross-env NODE_ENV=dev node --inspect ./server/index.js",
     "build": "node ./build/main.js",
-	"debug": "cross-env NODE_ENV=dev node ./build/main.js",
-	"ssr":"node ./build/ssr.js"
+    "debug": "cross-env NODE_ENV=dev node ./build/main.js",
+    "ssr": "node ./build/ssr.js"
   },
   "engines": {
     "node": ">=10.0.0"
@@ -27,6 +27,7 @@
     "@babel/preset-env": "^7.0.0",
     "@babel/preset-react": "^7.0.0",
     "babel-loader": "^8.0.0",
+    "bulma": "^0.7.1",
     "cross-env": "^5.2.0",
     "css-loader": "^1.0.0",
     "file-loader": "^2.0.0",

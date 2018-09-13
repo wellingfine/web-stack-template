@@ -18,11 +18,11 @@ var hwp=[]
 for (var i in jsFile){
 	//找不到就给默认模板
 	var tplPath = htmlFile[i] || u.resolve('./client/entry/default.html');
-
+	
 	hwp.push(
 		new HtmlWebpackPlugin({
 			chunks: [i],//TODO: common chunks option.
-			filename: '../ssr/' + i + '.html',
+			filename: isDev?i+'.html':'../ssr/' + i + '.html',
 			template: tplPath
 		})
 	);
@@ -32,7 +32,7 @@ var base={
 	entry: jsFile,
 	output:{
 		path:u.resolve('./server/public'),
-		filename:'[name].[contenthash:5].js',
+		filename:'[name].[hash:5].js',
 		publicPath:'/'
 	},
 	resolve:{
@@ -41,7 +41,7 @@ var base={
 	
 	module:{
 		rules:[{
-			test:/\.(sa|sc|c)ss$/i,
+			test:/\.(sass|scss|css)$/i,
 			use:[
 				isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
 				'css-loader',
@@ -76,8 +76,8 @@ var base={
 			// Options similar to the same options in webpackOptions.output
 			// both options are optional
 			// css file name should be named by hash ,so can be use between chunks
-			filename: isDev ? '[name].css' : '[contenthash:7].css',
-			chunkFilename: isDev ? '[id].css' : '[contenthash:7].css',
+			filename: isDev ? '[name].css' : 'asset/css/[contenthash:5].css',
+			chunkFilename: isDev ? '[id].css' : 'asset/css/[contenthash:5].css',
 		}),
 
 	]

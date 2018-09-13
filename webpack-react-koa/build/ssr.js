@@ -23,7 +23,12 @@ var config={
 	target:'node',
 	module:base.module,
 	resolve:base.resolve,
-	mode:'development',
+	
+}
+if(process.env.NODE_ENV=='dev'){
+	config.mode = 'development'
+}else{
+	config.mode = 'production'
 }
 
 
