@@ -1,8 +1,9 @@
+const React = require('react')
 const ReactDOM = require('react-dom')
 
 import App from '../page/Login'
 
-if (typeof document != undefined) {
+if (typeof document != 'undefined') {
 	ReactDOM.hydrate(<App />, document.getElementById('root'));
 }
 

@@ -5,6 +5,8 @@ module.exports = function (app, router) {
 		console.log('start login',ctx.request)
 	})
 	router.get('/login',(ctx,next)=>{
-		ctx.ssr('login')
+		ctx.ssr('login',{
+			message:'from server'
+		})
 	})
 }

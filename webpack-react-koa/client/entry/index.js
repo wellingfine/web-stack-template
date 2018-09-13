@@ -6,7 +6,7 @@ import { hot } from 'react-hot-loader'
 import App from '../page/Home'
 
 // const HotApp=hot(module)(App)
-if(typeof document!=undefined){
+if(typeof document!='undefined'){
 	ReactDOM.hydrate(<App />, document.getElementById('root'));
 }
 

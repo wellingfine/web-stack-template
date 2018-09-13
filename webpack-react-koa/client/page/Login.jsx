@@ -7,42 +7,46 @@ export default class App extends React.Component {
 	constructor(props) {
 		super(props)
 		this.state = {
+			message:'from client'
 		}
 	}
-
+	componentWillMount(){
+		//for ssr
+		Object.assign(this.state, window.__INIT_STATE__)
+	}
 	onClickLogin(){
 
 	}
 	render() {
 		return (
 			<div id="login">
-				<h1>Login</h1>
-				<div class="field">
-					<label class="label">Username</label>
-					<div class="control has-icons-left has-icons-right">
-						<input class="input is-success" type="text" placeholder="Text input" value="bulma" />
-						<span class="icon is-small is-left">
-							<i class="fas fa-user"></i>
+				<h1>Login {this.state.message}</h1>
+				<div className="field">
+					<label className="label">Username</label>
+					<div className="control has-icons-left has-icons-right">
+						<input className="input is-success" type="text" placeholder="Text input" value="bulma" />
+						<span className="icon is-small is-left">
+							<i className="fas fa-user"></i>
 						</span>
-						<span class="icon is-small is-right">
-							<i class="fas fa-check"></i>
+						<span className="icon is-small is-right">
+							<i className="fas fa-check"></i>
 						</span>
 					</div>
-					<p class="help is-success">This username is available</p>
+					<p className="help is-success">This username is available</p>
 				</div>
 
-				<div class="field">
-					<label class="label">Email</label>
-					<div class="control has-icons-left has-icons-right">
-						<input class="input is-danger" type="email" placeholder="Email input" value="hello@" />
-						<span class="icon is-small is-left">
-							<i class="fas fa-envelope"></i>
+				<div className="field">
+					<label className="label">Email</label>
+					<div className="control has-icons-left has-icons-right">
+						<input className="input is-danger" type="email" placeholder="Email input" value="hello@" />
+						<span className="icon is-small is-left">
+							<i className="fas fa-envelope"></i>
 						</span>
-						<span class="icon is-small is-right">
-							<i class="fas fa-exclamation-triangle"></i>
+						<span className="icon is-small is-right">
+							<i className="fas fa-exclamation-triangle"></i>
 						</span>
 					</div>
-					<p class="help is-danger">This email is invalid</p>
+					<p className="help is-danger">This email is invalid</p>
 				</div>
 		</div>
 		);

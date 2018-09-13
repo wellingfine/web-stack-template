@@ -16,7 +16,7 @@ var cacheHtml={}
  */
 async function render(path,state,htmlTplPath){
 	var htmlStr=null;
-	var webpackStats=this.res.locals.webpackStats
+	var webpackStats=(this.res.locals||{}).webpackStats
 	if(webpackStats){
 		//get html from memory
 		cacheHtml[path]=webpackStats.compilation.assets[path+'.html'].source()
