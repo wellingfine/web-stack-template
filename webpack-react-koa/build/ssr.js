@@ -19,12 +19,18 @@ var config={
 		filename:'[name].js',
 		libraryTarget:'commonjs2',
 	},
-	externals: [nodeExternals()],
+	externals: [nodeExternals({
+		//前端使用到的库，需要排除掉
+		whitelist:[/^bulma/]
+	})],
 	target:'node',
 	module:base.module,
 	resolve:base.resolve,
-	
+	plugins:[],
 }
+config.plugins.push(
+	base.plugins.pop()
+)
 if(process.env.NODE_ENV=='dev'){
 	config.mode = 'development'
 }else{

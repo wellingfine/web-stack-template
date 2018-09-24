@@ -21,6 +21,8 @@ project
 
 # feature
 
+* 本地开发，热重载
+
 
 # TODO
 

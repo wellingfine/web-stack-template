@@ -71,16 +71,18 @@ var base={
 	},
 	plugins:[
 		...hwp,
-
+	]
+}
+if(!isDev){
+	base.plugins.push(
 		new MiniCssExtractPlugin({
 			// Options similar to the same options in webpackOptions.output
 			// both options are optional
 			// css file name should be named by hash ,so can be use between chunks
 			filename: isDev ? '[name].css' : 'asset/css/[contenthash:5].css',
 			chunkFilename: isDev ? '[id].css' : 'asset/css/[contenthash:5].css',
-		}),
-
-	]
+		})
+	);
 }
 
 module.exports = base

@@ -7,6 +7,18 @@ if (typeof document != 'undefined') {
 	ReactDOM.hydrate(<App />, document.getElementById('root'));
 }
 
+if(module.hot){
+	console.log('x hot')
+}
+/*
+module.hot.accept('../page/Login', () => {
+	const NextApp = require('../page/Login').default
+	ReactDOM.render(
+		<NextApp />,
+		document.getElementById('root')
+	)
+})
+*/
 /**
  * export for ssr
  */

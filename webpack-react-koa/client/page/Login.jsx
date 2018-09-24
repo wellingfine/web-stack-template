@@ -1,14 +1,24 @@
 import React from 'react'
 
 require('bulma/bulma.sass')
-require('../../asset/css/login.scss')
+require('../asset/css/login.scss')
 
 export default class App extends React.Component {
 	constructor(props) {
 		super(props)
 		this.state = {
-			message:'from client'
+			message:'from client',
+			username:'',
+			password:'',
 		}
+		this.onUsernameChange=this.onUsernameChange.bind(this)
+		this.onPasswordChange=this.onPasswordChange.bind(this)
+	}
+	onUsernameChange(e){
+		this.setState({username:e.target.value})
+	}
+	onPasswordChange(e){
+		this.setState({ password: e.target.value })
 	}
 	componentWillMount(){
 		//for ssr
@@ -23,30 +33,18 @@ export default class App extends React.Component {
 				<h1>Login {this.state.message}</h1>
 				<div className="field">
 					<label className="label">Username</label>
-					<div className="control has-icons-left has-icons-right">
-						<input className="input is-success" type="text" placeholder="Text input" value="bulma" />
-						<span className="icon is-small is-left">
-							<i className="fas fa-user"></i>
-						</span>
-						<span className="icon is-small is-right">
-							<i className="fas fa-check"></i>
-						</span>
+					<div className="control">
+						<input className="input is-success" type="text" placeholder="Text input" value={this.state.username} onChange={this.onUsernameChange}/>
 					</div>
 					{/* <p className="help is-success">This username is available</p> */}
 				</div>
 
 				<div className="field">
-					<label className="label">Email</label>
-					<div className="control has-icons-left has-icons-right">
-						<input className="input is-danger" type="email" placeholder="Email input" value="hello@" />
-						<span className="icon is-small is-left">
-							<i className="fas fa-envelope"></i>
-						</span>
-						<span className="icon is-small is-right">
-							<i className="fas fa-exclamation-triangle"></i>
-						</span>
+					<label className="label">Password</label>
+					<div className="control">
+						<input className="input is-danger" type="password" placeholder="input your password"  value={this.state.password} onChange={this.onPasswordChange}/>
 					</div>
-					<p className="help is-danger">This email is invalid</p>
+					<p className="help is-danger">This email is invalid1</p>
 				</div>
 		</div>
 		);

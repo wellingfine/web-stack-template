@@ -15,6 +15,9 @@ if(process.env.NODE_ENV=='dev'){
     config=require('./config')
 }
 
+app.on('error',function(err,ctx){
+	console.log(err)
+})
 
 
 require('./middleware/ReactRender')(app, {
