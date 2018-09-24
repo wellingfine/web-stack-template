@@ -32,7 +32,7 @@ export default class App extends React.Component {
 							<i className="fas fa-check"></i>
 						</span>
 					</div>
-					<p className="help is-success">This username is available</p>
+					{/* <p className="help is-success">This username is available</p> */}
 				</div>
 
 				<div className="field">

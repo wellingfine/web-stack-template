@@ -35,5 +35,6 @@ project
 * koa 热更新
 * 提取css 类库 eg:bulma && css未压缩
 * ssr build error （虽然可以忽略）
-* 直出性能 ？ React.renderToStream?
+* ssr性能 ？ React.renderToStream? 缓存？
+* 
 
