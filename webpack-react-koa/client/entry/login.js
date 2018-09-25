@@ -8,17 +8,16 @@ if (typeof document != 'undefined') {
 }
 
 if(module.hot){
-	console.log('x hot')
+	console.log('x hot',module.hot)
+	module.hot.accept('../page/Login', () => {
+		console.log('update.')
+		const NextApp = require('../page/Login').default
+		ReactDOM.render(
+			<NextApp />,
+			document.getElementById('root')
+		)
+	})
 }
-/*
-module.hot.accept('../page/Login', () => {
-	const NextApp = require('../page/Login').default
-	ReactDOM.render(
-		<NextApp />,
-		document.getElementById('root')
-	)
-})
-*/
 /**
  * export for ssr
  */

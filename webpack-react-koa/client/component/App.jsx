@@ -1,5 +1,5 @@
 import React from 'react'
-const ReactDOMServer = require('react-dom/server');
+
 // import '../../asset/css/direct-style.scss'
 // import cssModule from '../../asset/css/module-style.scss'
 

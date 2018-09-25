@@ -19,7 +19,7 @@ function parseEntry(){
 
 		if (/\.js$/.test(f)) {
 			var name = f.substring(0, f.length - 3)
-			jsFile[name] = resolve(dir + '/' + f)
+			jsFile[name] = [resolve(dir + '/' + f),'webpack-hot-middleware/client']
 		} else if (/\.html$/.test(f)) {
 			var name = f.substring(0, f.length - 5)
 			htmlFile[name] = resolve(dir + '/' + f)

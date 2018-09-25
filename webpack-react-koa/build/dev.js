@@ -10,8 +10,10 @@ var config={
 		hot:true
 	}
 }
-config.plugins.push(
-	new webpack.HotModuleReplacementPlugin()
-)
+config.plugins.push(new webpack.optimize.OccurrenceOrderPlugin())
+config.plugins.push(new webpack.HotModuleReplacementPlugin())
+// Use NoErrorsPlugin for webpack 1.x
+config.plugins.push(new webpack.NoEmitOnErrorsPlugin())
+
 
 module.exports=config

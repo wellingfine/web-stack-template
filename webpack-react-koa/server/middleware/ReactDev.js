@@ -55,10 +55,9 @@ function main(app){
 			publicPath:config.output.publicPath
 		})
 	))
-	return ;
 	app.use(koaHotMiddleware(
 		hm(compiler,{
-
+			
 		})
 	));
 }
