@@ -1,6 +1,6 @@
 
 
-# 基于koa的模板 (Node.js 10.x)
+# 基于koa的模板 (Node.js 8.x)
 
 
 # 目录结构
@@ -10,7 +10,7 @@ project
 * build web目录的构建脚本
 * client 前端源码
 * server node相关
-* server/ssr 放置构建的react组件 element
+* server/ssr 存放构建后的ssr组件，每次更新需要重新生成
 
 # 命令
 
@@ -21,22 +21,21 @@ project
 
 # feature
 
-* 本地开发，热重载
+* koa+react 同构模板，使用方便
+* 服务端渲染
+* 本地开发，热重载集成
 
 
 # TODO
 
-* ssr 方案确定
+* ssr 方案优化
 * css模块化
 * css图片等资源生成，接入cdn路径绑定
 * manifest.json?
-* server+webpack 热重载
 * 本地mock
 * 自动化测试
 * react router |redux
-* koa 热更新
 * 提取css 类库 eg:bulma && css未压缩
-* ssr build error （虽然可以忽略）
 * ssr性能 ？ React.renderToStream? 缓存？
-* 
+
 
