@@ -8,12 +8,12 @@ if (typeof document != 'undefined') {
 }
 
 if(module.hot){
-	console.log('x hot',module.hot)
+	/**
+	 * enable hot reload
+	 */
 	module.hot.accept('../page/Login', () => {
-		console.log('update.')
-		const NextApp = require('../page/Login').default
 		ReactDOM.render(
-			<NextApp />,
+			<App />,
 			document.getElementById('root')
 		)
 	})
