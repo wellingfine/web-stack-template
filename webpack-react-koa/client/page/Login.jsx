@@ -31,7 +31,7 @@ export default class App extends React.Component {
 	render() {
 		return (
 		<div id="login">
-			<h1>Loginx {this.state.message}</h1>
+			<h1>Login</h1>
 			<div className="field">
 				<label className="label">Username</label>
 				<div className="control">

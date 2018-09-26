@@ -1,6 +1,11 @@
 var path = require('path');
 const fs=require('fs')
 
+var isDev = false
+if (process.env.NODE_ENV == 'dev') {
+	isDev = true
+}
+
 function resolve(p) {
 	return path.resolve(__dirname + '/../', p)
 }
@@ -19,7 +24,12 @@ function parseEntry(){
 
 		if (/\.js$/.test(f)) {
 			var name = f.substring(0, f.length - 3)
-			jsFile[name] = [resolve(dir + '/' + f),'webpack-hot-middleware/client']
+			if(isDev){
+				jsFile[name] = [resolve(dir + '/' + f), 'webpack-hot-middleware/client']
+			}else{
+				jsFile[name] = [resolve(dir + '/' + f)]
+			}
+			
 		} else if (/\.html$/.test(f)) {
 			var name = f.substring(0, f.length - 5)
 			htmlFile[name] = resolve(dir + '/' + f)
@@ -31,15 +41,8 @@ function parseEntry(){
 	}
 }
 
-var config={
-    publicPath:'',
-    assetPath:'',
-    
-}
-
-
 module.exports={
-	config,
 	resolve,
 	parseEntry,
+	isDev,
 }

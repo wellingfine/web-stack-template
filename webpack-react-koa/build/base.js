@@ -1,13 +1,7 @@
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
-var isDev=false
-if(process.env.NODE_ENV=='dev'){
-	isDev=true
-}
-
 const u=require('./util')
-
 
 var {jsFile,htmlFile}= u.parseEntry()
 
@@ -22,7 +16,7 @@ for (var i in jsFile){
 	hwp.push(
 		new HtmlWebpackPlugin({
 			chunks: [i],//TODO: common chunks option.
-			filename: isDev?i+'.html':'../ssr/' + i + '.html',
+			filename: u.isDev?i+'.html':'../ssr/' + i + '.html',
 			template: tplPath
 		})
 	);
@@ -43,7 +37,7 @@ var base={
 		rules:[{
 			test:/\.(sass|scss|css)$/i,
 			use:[
-				isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
+				u.isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
 				'css-loader',
 				'sass-loader',
 			]
@@ -73,14 +67,14 @@ var base={
 		...hwp,
 	]
 }
-if(!isDev){
+if(!u.isDev){
 	base.plugins.push(
 		new MiniCssExtractPlugin({
 			// Options similar to the same options in webpackOptions.output
 			// both options are optional
 			// css file name should be named by hash ,so can be use between chunks
-			filename: isDev ? '[name].css' : 'asset/css/[contenthash:5].css',
-			chunkFilename: isDev ? '[id].css' : 'asset/css/[contenthash:5].css',
+			filename: 'asset/css/[contenthash:5].css',
+			chunkFilename: 'asset/css/[contenthash:5].css',
 		})
 	);
 }

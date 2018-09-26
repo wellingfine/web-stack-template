@@ -9,6 +9,7 @@ process.env.WEBPACK_MODE='ssr'
 
 const u=require('./util')
 const base= require('./base')
+const config=require('./config')
 
 var { jsFile } = u.parseEntry()
 
@@ -21,7 +22,7 @@ var config={
 	},
 	externals: [nodeExternals({
 		//前端使用到的库，需要排除掉
-		whitelist:[/^bulma/]
+		whitelist: config.ssrAssetPath
 	})],
 	target:'node',
 	module:base.module,
