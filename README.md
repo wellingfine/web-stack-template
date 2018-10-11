@@ -3,8 +3,10 @@
 # web-stack-template
 多技术栈的web建站模板，快速构建项目站点。包括以下模板：
 
+* webpack-react-koa
 * webpack-react-eggjs 
 * webpack-vue-eggjs
+* webpack-vue-koa
 
 
 # 特性
@@ -12,7 +14,7 @@
 * 本地开发
 * node+web热重载
 * 资源定位
-* 服务端渲染直出
+* 服务端渲染
 * 
 
 # 规范约定
