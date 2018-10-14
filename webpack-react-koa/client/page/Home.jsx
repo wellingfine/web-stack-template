@@ -21,7 +21,7 @@ export default class App extends React.Component {
 	render() {
 		return (
 			<div>
-				<h1>Hello React! {this.state.title}</h1>
+				<h1>Hello React! {this.state.title}xxx</h1>
 				<a onClick={() => this.clickMe()}>Click me {this.state.count}</a>
 				{/* <div className={cssModule['module']}>.module-a style</div> */}
 				<div id="face-bar">

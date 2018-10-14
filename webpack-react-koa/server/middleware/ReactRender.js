@@ -24,7 +24,9 @@ async function render(path,state,htmlTplPath){
 	}
 	//TODO make cache of Com
 	try{
-		var Com=require(`${dir}/${path}.js`)
+		var path = `${dir}/${path}.js`
+		delete require.cache[path]
+		var Com=require(path)
 	}catch(e){
 		console.log(e);
 	}
