@@ -5,6 +5,7 @@ const reactDOMServer  =require('react-dom/server')
 const path=require('path')
 const fs=require('fs')
 
+var isDev=process.env.NODE_ENV=='dev'?true:false
 var dir='';
 var cache={} //object cache
 var cacheHtml={}
@@ -22,34 +23,32 @@ async function render(path,state,htmlTplPath){
 		cacheHtml[path]=webpackStats.compilation.assets[path+'.html'].source()
 		//TODO: generate ssr in runtime
 	}
-	//TODO make cache of Com
+	
+	var inst, mp, renderStr
 	try{
-		var path = `${dir}/${path}.js`
-		delete require.cache[path]
-		var Com=require(path)
-	}catch(e){
-		console.log(e);
-	}
-	var inst=null
-	try{
-		if(Com.default){
-			inst=new Com.default()
-		}else{
-			inst=new Com()
+		mp = `${dir}/${path}.js`
+		if(isDev){
+			delete require.cache[mp]
 		}
+		var Com=require(mp)
+
+		if (Com.default) {
+			inst = new Com.default()
+		} else {
+			inst = new Com()
+		}
+		//set state
+		for (var i in state) {
+			inst.state[i] = state[i]
+		}
+		//TODO use renderToStream
+		renderStr = reactDOMServer.renderToString(inst.render())
+
 	}catch(e){
-		this.body='Server render error'
+		//use normal renderStr if error
 		console.log(e)
-		return ;
+		renderStr=''
 	}
-
-	//set state
-	for(var i in state){
-		inst.state[i]=state[i]
-	}
-
-	//TODO use renderToStream
-	var renderStr= reactDOMServer.renderToString(inst.render())
 
 	var wrap =
 		'<div id="root">'+renderStr+'</div>'+
