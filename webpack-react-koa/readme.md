@@ -9,8 +9,11 @@ project
 
 * build web目录的构建脚本
 * client 前端源码
-* server node相关
-* server/ssr 存放构建后的ssr组件，每次更新需要重新生成
+* server koa相关
+* tmp 临时目录
+* tmp/log/ 日志
+* tmp/ssr/ 存放构建后的ssr组件，每次更新需要重新生成
+* 
 
 # 命令
 
@@ -22,13 +25,14 @@ project
 # feature
 
 * koa+react 同构模板，使用方便
-* 服务端渲染
-* 本地开发，热重载集成
+* 多入口点ServerSideRender
+* webpack+koa本地开发中间件，集成热重载
+* 简化webpack配置，开箱即用，扩展方便
+* 
 
 
 # TODO
 
-* ssr 方案优化
 * css模块化
 * css图片等资源生成，接入cdn路径绑定
 * manifest.json?
