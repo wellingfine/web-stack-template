@@ -9,6 +9,8 @@ project
 
 * build web目录的构建脚本
 * client 前端源码
+* client/entry 入口点配置，模板
+* client/page 页面入口
 * server koa相关
 * tmp 临时目录
 * tmp/log/ 日志
