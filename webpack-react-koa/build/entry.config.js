@@ -8,9 +8,10 @@
  * 	html:''
  * }
  */
+const util=require('./util')
 module.exports={
 	ext:'jsx',
-	pageDirectory:'/client/page/',
+	entryDirectory:util.resolve('./client/page/'),
 	tmp:'/tmp/',
 	htmlTpl:'',//默认模板
 	page:{

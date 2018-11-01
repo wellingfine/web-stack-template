@@ -16,6 +16,8 @@ var cacheHtml={}
  * @param {string} htmlTplPath html template for ssr
  */
 async function render(path,state,htmlTplPath){
+	path=path.replace(/\//g,'~')
+	
 	var htmlStr=null;
 	var webpackStats=(this.res.locals||{}).webpackStats
 	if(webpackStats){

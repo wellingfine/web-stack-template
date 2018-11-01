@@ -35,10 +35,10 @@ const u=require('./util')
 const base= require('./base')
 const cfg=require('./config')
 
-var { jsFile } = u.parseEntry()
+var chunkObj = require('./bootstrap')
 
 var config={
-	entry: jsFile,
+	entry: chunkObj,
 	output:{
 		path: u.resolve('./server/ssr'),
 		filename:'[name].js',

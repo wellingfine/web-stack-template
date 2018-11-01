@@ -4,14 +4,15 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const u=require('./util')
 
 var {jsFile,htmlFile}= u.parseEntry()
+var chunkObj=require('./bootstrap')
 
 /**
  * 生成各个入口点自己的html
  */
 var hwp=[]
-for (var i in jsFile){
-	//找不到就给默认模板
-	var tplPath = htmlFile[i] || u.resolve('./client/entry/default.html');
+for (var i in chunkObj){
+	//TODO 自定义各个页的html模板
+	var tplPath = u.resolve('./client/entry/default.html');
 	
 	hwp.push(
 		new HtmlWebpackPlugin({
@@ -23,7 +24,7 @@ for (var i in jsFile){
 }
 
 var base={
-	entry: jsFile,
+	entry: chunkObj,
 	output:{
 		path:u.resolve('./server/public'),
 		filename:'[name].[hash:5].js',

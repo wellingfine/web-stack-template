@@ -9,6 +9,13 @@ if (process.env.NODE_ENV == 'dev') {
 function resolve(p) {
 	return path.resolve(__dirname + '/../', p)
 }
+/**
+ * 转换文件名 \\/ 转为 ~
+ * ~转为 ~~
+ */
+function encodeFlatPath(file){
+	return file.replace(/[\\\/]+/g,'~')
+}
 
 /**
  * 获取入口点所有支持的文件
@@ -41,8 +48,29 @@ function parseEntry(){
 	}
 }
 
+/**
+ * 获取相对目录的所有文件
+ */
+function flatDir(dir){
+	var paths = fs.readdirSync(dir);
+	var files=[]
+	paths.forEach(function (item, index) {
+		var p = dir + path.sep + item
+		var info = fs.statSync(p)
+		if (info.isDirectory()) {
+			files = files.concat(flatDir(p))
+		} else {
+			files.push(p)
+		}
+	})
+	return files
+}
+
 module.exports={
 	resolve,
 	parseEntry,
 	isDev,
+	flatDir,
+	encodeFlatPath,
+	
 }
