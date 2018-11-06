@@ -43,5 +43,6 @@ project
 * react router |redux
 * 提取css 类库 eg:bulma && css未压缩
 * ssr性能 ？ React.renderToStream? 缓存？
+* 不生成ssr相关临时文件，改为随app启动时生成，减少文件生成及读取
 
 
