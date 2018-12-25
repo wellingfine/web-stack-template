@@ -2,29 +2,43 @@ const Bundler = require('parcel-bundler');
 
 const u=require('./util')
 
-
-// Bundler 选项
+// Bundler options
 const options = {
-	outDir: u.resolve('server/public/dist'), // 将生成的文件放入输出目录下，默认为 dist
-	outFile: 'index.html', // 输出文件的名称
-	publicUrl: './', // 静态资源的 url ，默认为 dist
-	watch: true, // 是否需要监听文件并在发生改变时重新编译它们，默认为 process.env.NODE_ENV !== 'production'
-	cache: true, // 启用或禁用缓存，默认为 true
-	cacheDir: '.cache', // 存放缓存的目录，默认为 .cache
-	minify: false, // 压缩文件，当 process.env.NODE_ENV === 'production' 时，会启用
-	target: 'browser', // 浏览器/node/electron, 默认为 browser
-	https: false, // 服务器文件使用 https 或者 http，默认为 false
-	logLevel: 3, // 3 = 输出所有内容，2 = 输出警告和错误, 1 = 输出错误
-	hmrPort: 0, // hmr socket 运行的端口，默认为随机空闲端口(在 Node.js 中，0 会被解析为随机空闲端口)
-	sourceMaps: true, // 启用或禁用 sourcemaps，默认为启用(在精简版本中不支持)
-	hmrHostname: '', // 热模块重载的主机名，默认为 ''
-	detailedReport: false // 打印 bundles、资源、文件大小和使用时间的详细报告，默认为 false，只有在禁用监听状态时才打印报告
+	outDir: u.resolve('server/public/dist'), // The out directory to put the build files in, defaults to dist
+	// outFile: '[name].html', // The name of the outputFile
+	publicUrl:'/dist',
+	watch: true, // Whether to watch the files and rebuild them on change, defaults to process.env.NODE_ENV !== 'production'
+	cache: true, // Enabled or disables caching, defaults to true
+	cacheDir: '.cache', // The directory cache gets put in, defaults to .cache
+	contentHash: false, // Disable content hash from being included on the filename
+	minify: false, // Minify files, enabled if process.env.NODE_ENV === 'production'
+	scopeHoist: false, // Turn on experimental scope hoisting/tree shaking flag, for smaller production bundles
+	target: 'browser', // Browser/node/electron, defaults to browser
+	/*
+	https: { // Define a custom {key, cert} pair, use true to generate one or false to use http
+		cert: './ssl/c.crt', // Path to custom certificate
+		key: './ssl/k.key' // Path to custom key
+	},*/
+	logLevel: 3, // 3 = log everything, 2 = log warnings & errors, 1 = log errors
+	hmr: true, // Enable or disable HMR while watching
+	hmrPort: 0, // The port the HMR socket runs on, defaults to a random free port (0 in node.js resolves to a random free port)
+	sourceMaps: true, // Enable or disable sourcemaps, defaults to enabled (minified builds currently always create sourcemaps)
+	hmrHostname: '', // A hostname for hot module reload, default to ''
+	detailedReport: false // Prints a detailed report of the bundles, assets, filesizes and times, defaults to false, reports are only printed if watch is disabled
 };
 
-// 使用提供的入口文件路径和选项初始化 bundler
-const bundler = new Bundler(u.resolve('build/entry/home.html'), options);
 
-// 运行 bundler，这将返回主 bundle
-// 如果你正在使用监听模式，请使用下面这些事件，这是因为该 promise 只会触发一次，而不是每次重新构建时都触发
+;(async function () {
+	var entryFiles=[
+		u.resolve('build/entry/home.html'),
+		u.resolve('build/entry/page2.html'),
+	]
+	// Initializes a bundler using the entrypoint location and options provided
+	const bundler = new Bundler(entryFiles, options);
 
-bundler.bundle();
+	bundler.serve(8900)
+
+	// Run the bundler, this returns the main bundle
+	// Use the events if you're using watch mode as this promise will only trigger once and not for every rebuild
+	// const bundle = await bundler.bundle();
+})();
